@@ -53,15 +53,11 @@ function App() {
 	};
 
 	useEffect(() => {
-		// If text is not a font-name:
-		if (!text.length || !FONTS.find(({ name }) => name === text)) {
-			setText(font.name);
-		}
 		setText(font.name);
-		setStretch(font.stretch.medium);
-		setWeight(font.weight.medium);
-		setSize(font.size.medium * 0.5);
-	}, [font, setFont, callbacks.font]);
+		setStretch(font.stretch.constrain(stretch));
+		setWeight(font.weight.constrain(weight));
+		setSize(font.size.constrain(size));
+	}, [font, setFont]);
 
 	useEffect(
 		() => (document.body.style.backgroundColor = color),
