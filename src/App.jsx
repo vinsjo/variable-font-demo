@@ -3,9 +3,10 @@ import './css/App.css';
 import { ThemeProvider, createTheme } from '@mui/material';
 import DemoSlider from './components/DemoSlider';
 import FontDemo from './components/FontDemo';
-import ColorButtons from './components/ColorButtons';
-import UpperCaseToggle from './components/UppercaseToggle';
-import { fontProps } from './functions/fontProps';
+import ColorSelect from './components/ColorSelect';
+import CaseToggle from './components/CaseToggle';
+import FontSelect from './components/FontSelect';
+import fontProps from './functions/fontProps';
 
 const THEME = createTheme({
 	palette: {
@@ -17,6 +18,7 @@ const THEME = createTheme({
 const FONTS = [
 	fontProps('Archivo', 62, 125),
 	fontProps('Encode Sans', 75, 125),
+	fontProps('Georama', 62.5, 150),
 ];
 const COLORS = {
 	purple: '#AB9DF2',
@@ -25,32 +27,41 @@ const COLORS = {
 };
 
 function App() {
-	const font = FONTS[0];
-
-	const [text, setText] = useState(font.name);
-	const [stretch, setStretch] = useState(font.stretch.medium);
-	const [weight, setWeight] = useState(font.weight.medium);
-	const [size, setSize] = useState(font.size.medium);
+	const [font, setFont] = useState(FONTS[0]);
+	const [text, setText] = useState('');
+	const [stretch, setStretch] = useState();
+	const [weight, setWeight] = useState();
+	const [size, setSize] = useState(64);
 
 	const [color, setColor] = useState(COLORS.purple);
 	const [upperCase, setUpperCase] = useState(false);
 
-	const onFontChange = {
+	const callbacks = {
 		stretch: useCallback(value => setStretch(value), [stretch, setStretch]),
 		weight: useCallback(value => setWeight(value), [weight, setWeight]),
 		size: useCallback(value => setSize(value), [size, setSize]),
+		color: useCallback(value => setColor(value), [color, setColor]),
+		text: useCallback(value => setText(value), [text, setText]),
+		font: useCallback(
+			name => setFont(FONTS.find(font => font.name === name) || FONTS[0]),
+			[font, setFont]
+		),
+		upperCase: useCallback(
+			() => setUpperCase(!upperCase),
+			[upperCase, setUpperCase]
+		),
 	};
 
-	const onColorChange = useCallback(
-		value => setColor(value),
-		[color, setColor]
-	);
-
-	const onTextInput = useCallback(value => setText(value), [text, setText]);
-
-	const onUpperCaseChange = useCallback(() => {
-		setUpperCase(!upperCase);
-	}, [upperCase, setUpperCase]);
+	useEffect(() => {
+		// If text is not a font-name:
+		if (!text.length || !FONTS.find(({ name }) => name === text)) {
+			setText(font.name);
+		}
+		setText(font.name);
+		setStretch(font.stretch.medium);
+		setWeight(font.weight.medium);
+		setSize(font.size.medium * 0.5);
+	}, [font, setFont, callbacks.font]);
 
 	useEffect(
 		() => (document.body.style.backgroundColor = color),
@@ -60,10 +71,15 @@ function App() {
 	return (
 		<ThemeProvider theme={THEME}>
 			<div className="App">
-				<ColorButtons
+				<ColorSelect
 					selected={color}
 					colors={COLORS}
-					onChange={onColorChange}
+					onChange={callbacks.color}
+				/>
+
+				<CaseToggle
+					selected={upperCase}
+					onChange={callbacks.upperCase}
 				/>
 				<FontDemo
 					value={text}
@@ -74,25 +90,24 @@ function App() {
 						fontStretch: `${stretch}%`,
 						fontWeight: `${weight}`,
 					}}
-					onInput={onTextInput}
+					onInput={callbacks.text}
 				/>
-
 				<div className="container adjustments">
 					<DemoSlider
 						id="stretch"
-						value={stretch}
+						value={stretch || font.stretch.medium}
 						min={font.stretch.min}
 						max={font.stretch.max}
 						step={0.1}
-						onChange={onFontChange.stretch}
+						onChange={callbacks.stretch}
 					/>
 					<DemoSlider
 						id="weight"
-						value={weight}
+						value={weight || font.weight.medium}
 						min={font.weight.min}
 						max={font.weight.max}
 						step={10}
-						onChange={onFontChange.weight}
+						onChange={callbacks.weight}
 					/>
 					<DemoSlider
 						id="size"
@@ -100,11 +115,12 @@ function App() {
 						min={font.size.min}
 						max={font.size.max}
 						step={1}
-						onChange={onFontChange.size}
+						onChange={callbacks.size}
 					/>
-					<UpperCaseToggle
-						onChange={onUpperCaseChange}
-						selected={upperCase}
+					<FontSelect
+						selected={font.name}
+						fonts={FONTS}
+						onChange={callbacks.font}
 					/>
 				</div>
 			</div>

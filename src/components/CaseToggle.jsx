@@ -1,7 +1,7 @@
 import { ToggleButton } from '@mui/material';
 import TextFieldsIcon from '@mui/icons-material/TextFields';
 
-function UpperCaseToggle({ selected, onChange }) {
+function CaseToggle({ selected, onChange }) {
 	const handleChange = e => onChange(e.target.value);
 	return (
 		<div className="container uppercase-toggle">
@@ -17,4 +17,4 @@ function UpperCaseToggle({ selected, onChange }) {
 	);
 }
 
-export default UpperCaseToggle;
+export default CaseToggle;

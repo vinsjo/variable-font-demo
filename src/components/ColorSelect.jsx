@@ -1,4 +1,4 @@
-function ColorButtons({ selected, colors, onChange }) {
+function ColorSelect({ selected, colors, onChange }) {
 	const handleClick = e => onChange(e.target.value);
 	return (
 		<div className="container color-buttons">
@@ -20,4 +20,4 @@ function ColorButtons({ selected, colors, onChange }) {
 	);
 }
 
-export default ColorButtons;
+export default ColorSelect;

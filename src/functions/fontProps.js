@@ -1,3 +1,36 @@
+/**
+ * @param {Number} min
+ * @param {Number} max
+ */
+const getRange = (min, max) => {
+	return {
+		min: min,
+		max: max,
+		get medium() {
+			return (
+				Math.round((this.min + (this.max - this.min) * 0.5) * 10) / 10
+			);
+		},
+		constrain(val) {
+			if (typeof val !== 'number' || Number.isNaN(val)) {
+				return this.medium;
+			}
+			return Math.max(Math.min(this.max, val), this.min);
+		},
+	};
+};
+
+/**
+ * @param {String} name
+ * @param {Number} strMin
+ * @param {Number} strMax
+ * @param {Number} wghtMin
+ * @param {Number} wghtMax
+ * @param {Number} sizeMin
+ * @param {Number} sizeMax
+ * @param {String} fallBackName
+ * @returns
+ */
 function fontProps(
 	name,
 	strMin = 75,
@@ -6,38 +39,19 @@ function fontProps(
 	wghtMax = 900,
 	sizeMin = 0,
 	sizeMax = 256,
-	fallBack = 'sans-serif'
+	fallBackName = 'sans-serif'
 ) {
-	const medium = ({ min, max }) => Math.round(min + (max - min) * 0.5);
 	const font = {
 		name: name,
-		fallBack: fallBack,
+		fallBack: fallBackName,
 		get fontFamily() {
 			return `${this.name}, ${this.fallBack}`;
 		},
-		stretch: {
-			min: strMin,
-			max: strMax,
-			get medium() {
-				return medium(this);
-			},
-		},
-		weight: {
-			min: wghtMin,
-			max: wghtMax,
-			get medium() {
-				return medium(this);
-			},
-		},
-		size: {
-			min: sizeMin,
-			max: sizeMax,
-			get medium() {
-				return medium(this);
-			},
-		},
+		stretch: getRange(strMin, strMax),
+		weight: getRange(wghtMin, wghtMax),
+		size: getRange(sizeMin, sizeMax),
 	};
 	return font;
 }
 
-export { fontProps };
+export default fontProps;
