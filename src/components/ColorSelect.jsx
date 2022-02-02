@@ -1,18 +1,18 @@
 function ColorSelect({ selected, colors, onChange }) {
-	const handleClick = e => onChange(e.target.value);
 	return (
 		<div className="container color-buttons">
-			{Object.entries(colors).map(([key, val]) => {
-				const style = selected === val ? {} : { backgroundColor: val };
+			{Object.entries(colors).map(([key, color]) => {
+				const style =
+					selected === color ? {} : { backgroundColor: color };
 				return (
 					<button
 						key={key}
 						className="color-btn"
 						type="button"
-						value={val}
+						value={color}
 						style={style}
-						onClick={handleClick}
-						disabled={selected === val}
+						onClick={() => onChange(color)}
+						disabled={selected === color}
 					></button>
 				);
 			})}

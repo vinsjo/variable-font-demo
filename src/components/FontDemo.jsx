@@ -1,5 +1,4 @@
 function FontDemo({ value, style, onInput }) {
-	const handleInput = e => onInput && onInput(e.target.value);
 	return (
 		<div className="container demo">
 			<input
@@ -8,7 +7,7 @@ function FontDemo({ value, style, onInput }) {
 				style={style}
 				spellCheck="false"
 				maxLength={30}
-				onInput={handleInput}
+				onInput={e => onInput(e.target.value)}
 			/>
 		</div>
 	);

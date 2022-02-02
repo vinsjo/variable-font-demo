@@ -1,7 +1,6 @@
 import { Slider, InputLabel } from '@mui/material';
 
 function DemoSlider({ value, id, min, max, step, onChange }) {
-	const handleChange = e => onChange && onChange(e.target.value);
 	return (
 		<div className="container slider-container">
 			<InputLabel htmlFor={id} sx={{ color: 'primary.main' }}>
@@ -15,7 +14,7 @@ function DemoSlider({ value, id, min, max, step, onChange }) {
 				step={step}
 				min={min}
 				max={max}
-				onChange={handleChange}
+				onChange={e => onChange(e.target.value)}
 				valueLabelDisplay="off"
 			/>
 		</div>

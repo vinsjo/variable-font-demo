@@ -1,13 +1,12 @@
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 
 function FontSelect({ selected, fonts, onChange }) {
-	const handleChange = e => onChange(e.target.value);
 	return (
 		<ToggleButtonGroup
 			size="small"
 			className="container font-select"
 			value={selected}
-			onChange={handleChange}
+			onChange={e => onChange(e.target.value)}
 			sx={{ fontSize: '5px' }}
 			exclusive
 		>
