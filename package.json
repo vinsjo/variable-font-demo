@@ -1,22 +1,36 @@
 {
-  "name": "react-font-demo",
+  "name": "variable-font-demo",
+  "private": true,
   "version": "0.0.0",
-  "homepage": "http://vinsjo.github.io/variable-font-demo",
+  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "format": "npx prettier --write src",
+    "lint": "npx eslint src --ext .ts,.tsx,.js,.jsx"
   },
   "dependencies": {
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
-    "@mui/icons-material": "^5.3.1",
-    "@mui/material": "^5.4.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.9",
+    "react": "latest",
+    "react-dom": "latest",
+    "x-is-type": "^1.1.6"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^1.0.7",
-    "vite": "^2.7.2"
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "@vitejs/plugin-react": "latest",
+    "eslint": "latest",
+    "eslint-plugin-react": "latest",
+    "prettier": "latest",
+    "pretty-quick": "latest",
+    "typescript": "latest",
+    "vite": "latest"
   }
 }

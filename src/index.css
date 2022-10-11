@@ -1,0 +1,30 @@
+@import url(./fonts.css);
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    overflow: hidden;
+}
+
+body {
+    font-family: var(--main-font);
+    font-size: 1rem;
+    line-height: 160%;
+    width: 100vw;
+    height: 100vh;
+    transition: background-color 0.15s ease;
+}
+input,
+button {
+    outline: none;
+    border-radius: 3px;
+    border: none;
+}
+
+button:not(:disabled) {
+    cursor: pointer;
+}
