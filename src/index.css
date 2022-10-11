@@ -12,6 +12,7 @@ body {
 
 body {
     font-family: var(--main-font);
+    background-color: #ab9df2;
     font-size: 1rem;
     line-height: 160%;
     width: 100vw;
