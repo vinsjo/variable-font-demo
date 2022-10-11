@@ -12,7 +12,7 @@ export const getRange = ({ min, max }: MinMax) => {
 const fontDefaults = {
     stretch: minmax(75, 125),
     weight: minmax(100, 900),
-    size: minmax(1, 256),
+    size: minmax(6, 256),
     fallbackName: 'sans-serif',
 };
 

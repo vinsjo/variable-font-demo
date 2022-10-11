@@ -33,6 +33,7 @@
     align-content: center;
     justify-items: center;
     position: relative;
+    z-index: 1;
     overflow: visible;
 }
 
@@ -59,21 +60,33 @@
 .slider-container {
     height: 4rem;
     position: relative;
+    z-index: 10;
+    gap: 0.5rem;
 }
 
-.slider-container label {
+.slider-container label,
+.slider-name {
     font-family: var(--code-font);
-    padding-bottom: 0.5em;
+    font-size: 1rem;
+}
+
+.slider-name {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
 }
 
 .color-buttons {
     position: fixed;
     top: 0;
     left: 0;
-    width: fit-content;
+    width: auto;
     flex-direction: row;
     gap: 1rem;
     padding: 0.75rem;
+    z-index: 10;
 }
 
 .color-btn {
@@ -90,22 +103,23 @@
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-@media (hover: hover) {
-    .color-btn:not(:disabled):hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 0 0.5rem rgba(0, 0, 0, 0.1);
-    }
-}
-
 .uppercase-toggle {
     position: fixed;
     top: 0;
     right: 0;
     width: fit-content;
     padding: 0.75rem;
+    z-index: 10;
 }
 
 .font-select {
     margin-top: 1rem;
     flex-direction: row;
+}
+
+@media (hover: hover) {
+    .color-btn:not(:disabled):hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    }
 }

@@ -18,6 +18,7 @@ function Slider({ value, id, min, max, step, onChange }: SliderProps) {
     );
     return (
         <div className="container slider-container">
+            <code className="slider-name">{id}</code>
             <InputLabel htmlFor={id} sx={{ color: 'primary.main' }}>
                 {value}
             </InputLabel>

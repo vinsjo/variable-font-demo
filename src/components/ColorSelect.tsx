@@ -7,6 +7,7 @@ function ColorSelect({ colors, selected, onChange }: ColorSelectProps) {
     return (
         <div className="container color-buttons">
             {Object.entries(colors).map(([key, color]) => {
+                console.log(selected, color);
                 const style =
                     selected === color ? {} : { backgroundColor: color };
                 return (
